@@ -67,8 +67,7 @@ public class PlayerController : MonoBehaviour
         transform.LookAt(attackTarget.transform);
 
 
-        // TODO: ÐÞ¸Ä¹¥»÷·¶Î§²ÎÊý
-        while (Vector3.Distance(attackTarget.transform.position, transform.position) > 2.0f)
+        while (Vector3.Distance(attackTarget.transform.position, transform.position) > characterStats.attackData.attackRange)
         {
             agent.destination = attackTarget.transform.position;
             yield return null;
