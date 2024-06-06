@@ -11,5 +11,8 @@ Cinemachine FreeLook Camera
 
 Ctrl + D 复制一个出来，跳出fbx文件就可以编辑了
 
-
+lesson18
+添加了guard模式
+和对死亡的判定
+添加了史莱姆守卫模式和死亡的动画
 
