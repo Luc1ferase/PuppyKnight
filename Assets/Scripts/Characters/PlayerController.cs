@@ -17,14 +17,15 @@ public class PlayerController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        characterStats=GetComponent<CharacterStats>();
+        characterStats = GetComponent<CharacterStats>();
     }
 
     void Start()
     {
         MouseManager.Instance.OnMouseClicked += MoveToTarget;
         MouseManager.Instance.OnEnemyClicked += EventAttack;
-        characterStats.MaxHealth = 2;
+
+        GameManager.Instance.RegisterPlayer(characterStats);
     }
 
 
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         isDead = characterStats.CurrentHealth == 0;
+
         SwitchAnimation();
 
         lastAttackTime -= Time.deltaTime;
