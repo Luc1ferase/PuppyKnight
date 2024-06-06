@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,6 +16,8 @@ public class EnemyController : MonoBehaviour
     private NavMeshAgent agent;
 
     private Animator anim;
+
+    private Collider coll;
 
     private CharacterStats characterStats;
 
@@ -34,6 +37,8 @@ public class EnemyController : MonoBehaviour
 
     private float lastAttackTime;
 
+    private Quaternion guardRotaion;
+
     [Header("Patrol State")]
 
     public float patrolRange;
@@ -48,16 +53,18 @@ public class EnemyController : MonoBehaviour
     bool isChase;
 
     bool isFollow;
+    bool isDead;
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         characterStats = GetComponent<CharacterStats>();
+        coll = GetComponent<Collider>();
 
         speed = agent.speed;
-
         guardPos = transform.position;
+        guardRotaion = transform.rotation;
 
         remainLookAtTime = lookAtTime;
     }
@@ -77,6 +84,8 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+        if (characterStats.CurrentHealth == 0)
+            isDead = true;
         SwitchStates();
         SwitchAnimation();
         lastAttackTime -= Time.deltaTime;
@@ -88,11 +97,15 @@ public class EnemyController : MonoBehaviour
         anim.SetBool("Chase", isChase);
         anim.SetBool("Follow", isFollow);
         anim.SetBool("Critical", characterStats.isCritical);
+        anim.SetBool("Death", isDead);
     }
     void SwitchStates()
     {
+        if (isDead)
+            enemyStates = EnemyStates.DEAD;
+
         //如果发现player 切换到chase
-        if (FoundPlayer())
+        else if (FoundPlayer())
         {
             enemyStates = EnemyStates.CHASE;
             Debug.Log("Founded Player");
@@ -101,6 +114,19 @@ public class EnemyController : MonoBehaviour
         {
 
             case EnemyStates.GUARD:
+                isChase = false;
+
+                if (transform.position != guardPos)
+                {
+                    isWalk = true;
+                    agent.isStopped = false;
+                    agent.destination = guardPos;
+
+                    if (Vector3.SqrMagnitude(guardPos - transform.position) <= agent.stoppingDistance)
+                        isWalk = false;
+                    transform.rotation = Quaternion.Lerp(transform.rotation, guardRotaion, 0.01f);
+                }
+
                 break;
             case EnemyStates.PATROL:
 
@@ -151,7 +177,7 @@ public class EnemyController : MonoBehaviour
                     isFollow = true;
                     agent.isStopped = false;
                     agent.destination = attackTarget.transform.position;
-                    
+
                 }
 
                 //TODO : 在攻击范围内则攻击
@@ -165,7 +191,7 @@ public class EnemyController : MonoBehaviour
                         lastAttackTime = characterStats.attackData.coolDown;
 
                         //暴击判断
-                        characterStats.isCritical= Random.value < characterStats.attackData.critialChance;
+                        characterStats.isCritical = Random.value < characterStats.attackData.critialChance;
                         //执行攻击
                         Attack();
 
@@ -175,6 +201,9 @@ public class EnemyController : MonoBehaviour
 
                 break;
             case EnemyStates.DEAD:
+                coll.enabled = false;
+                agent.enabled = false;
+                Destroy(gameObject, 2f);
                 break;
         }
     }
@@ -182,9 +211,9 @@ public class EnemyController : MonoBehaviour
     void Attack()
     {
         transform.LookAt(attackTarget.transform);//面向敌人
-        if(TargetInAttackRange())
+        if (TargetInAttackRange())
             anim.SetTrigger("Attack");//近身攻击动画
-        else if(TargetInSkillRange())
+        else if (TargetInSkillRange())
             anim.SetTrigger("Skill");//技能攻击动画
     }
 
