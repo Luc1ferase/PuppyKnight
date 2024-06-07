@@ -1,6 +1,10 @@
 # PuppyKnight
 游戏引擎开发课-3D项目学习
 
+### Tips:  
+vs多行注释：CTRL+K,CTRL +C  
+取消注释： CTRL+K,CTRL+U
+
 ### BUG:动画Read-Only，无法插入事件时
 
 ![image](Puppy Knight\ReadmePics\read-only.png "123")
@@ -37,4 +41,15 @@ FixBug:
 --lesson19中未在unity中创建GameManager对象，导致获取游戏对象时抛了空指针异常  
 
 TODO:  
---Add more enemys.
+--Add more enemies.
+
+#### Lesson21
+
+New Feature:  
+
+--Now we have more Enemies,Grunt,Golem.  
+--Added generic attribute script by Override it to allow us to quickly create an enemy
+
+TODO:
+
+Setup more Grunts.

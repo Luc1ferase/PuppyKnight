@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
     {
 
         StopAllCoroutines();//终止所有协程，打断攻击
+        if (isDead) return;
 
         agent.isStopped = false;
         agent.destination = target;
@@ -61,6 +62,7 @@ public class PlayerController : MonoBehaviour
 
     private void EventAttack(GameObject target)
     {
+        if (isDead) return;
         if (target != null)
         {
             attackTarget = target;
