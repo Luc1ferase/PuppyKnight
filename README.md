@@ -7,6 +7,7 @@ vs多行注释：CTRL+K,CTRL +C
 
 ### BUG:动画Read-Only，无法插入事件时
 
+//图片待补充
 ![image](Puppy Knight\ReadmePics\read-only.png "123")
 
 Ctrl + D 复制一个出来，跳出fbx文件就可以编辑了
