@@ -9,7 +9,7 @@ public enum EnemyStates { GUARD, PATROL, CHASE, DEAD };
 
 [RequireComponent(typeof(NavMeshAgent))] //确保NavMeshAgent一定存在(没有时会自动创建)
 [RequireComponent(typeof(CharacterStats))]
-public class EnemyController : MonoBehaviour,IEndGameObserver
+public class EnemyController : MonoBehaviour, IEndGameObserver
 {
 
     private EnemyStates enemyStates;
@@ -30,7 +30,7 @@ public class EnemyController : MonoBehaviour,IEndGameObserver
 
     private float speed;
 
-    private GameObject attackTarget;
+    protected GameObject attackTarget;
 
     public float lookAtTime;
 
@@ -94,7 +94,7 @@ public class EnemyController : MonoBehaviour,IEndGameObserver
 
     void OnDisable()
     {
-        if (GameManager.IsInitialized)
+        if (!GameManager.IsInitialized)
             return;
         GameManager.Instance.RemoveObserver(this);
     }
@@ -223,7 +223,8 @@ public class EnemyController : MonoBehaviour,IEndGameObserver
                 break;
             case EnemyStates.DEAD:
                 coll.enabled = false;
-                agent.enabled = false;
+                //agent.enabled = false;
+                agent.radius = 0;
                 Destroy(gameObject, 2f);
                 break;
         }
