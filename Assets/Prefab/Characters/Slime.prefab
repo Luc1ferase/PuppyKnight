@@ -362,6 +362,7 @@ GameObject:
   - component: {fileID: 6453129637228779767}
   - component: {fileID: 3630915688281526150}
   - component: {fileID: 7509478855341370474}
+  - component: {fileID: 8578477416414975}
   m_Layer: 7
   m_Name: Slime
   m_TagString: Enemy
@@ -442,6 +443,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sightRadius: 8
+  isGuard: 0
+  lookAtTime: 0
+  patrolRange: 0
 --- !u!136 &7509478855341370474
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -465,6 +469,22 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &8578477416414975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5800957229680320035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67045ab1cb5484948b2ae14a97e034a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  templateData: {fileID: 0}
+  characterData: {fileID: 0}
+  attackData: {fileID: 0}
+  isCritical: 0
 --- !u!1 &6042708073485892370
 GameObject:
   m_ObjectHideFlags: 0

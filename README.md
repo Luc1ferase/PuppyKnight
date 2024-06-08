@@ -86,6 +86,33 @@ void OnDisable()
         GameManager.Instance.RemoveObserver(this);
     }
 ```
+#### Lesson23
+
+Tips:
+如果出现动画滑动的情况，取消NavMeshAgent中的Auto Braking
+
+New Feature:  
+--Add Extension Method script which can judge if the attack is facing target.
+
+TODO:  
+--Setup Golem
+
+#### Lesson24
+
+Tips:
+```csharp
+Vector3 direction = (attackTarget.transform.position - transform.position).normalized;
+```
+==
+```csharp
+Vector3 direction = attackTarget.transform.position - transform.position;
+    direction.Normalize();
+```
+
+New Feature:  
+
+--Add up new Enemy Golem which has Powerful Knockout attack.
+
 
 
 
