@@ -12,12 +12,15 @@ public class PlayerController : MonoBehaviour
     private GameObject attackTarget;
     private float lastAttackTime;
     private bool isDead;
+    private float stopDistance;
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         characterStats = GetComponent<CharacterStats>();
+
+        stopDistance = agent.stoppingDistance;
     }
 
     void Start()
@@ -56,6 +59,7 @@ public class PlayerController : MonoBehaviour
         StopAllCoroutines();//终止所有协程，打断攻击
         if (isDead) return;
 
+        agent.stoppingDistance = stopDistance;
         agent.isStopped = false;
         agent.destination = target;
     }
@@ -74,6 +78,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator MoveToAttackTarget()
     {
         agent.isStopped = false;
+        agent.stoppingDistance = characterStats.attackData.attackRange;
 
         transform.LookAt(attackTarget.transform);
 
