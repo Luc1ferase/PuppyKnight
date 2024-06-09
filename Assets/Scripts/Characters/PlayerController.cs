@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
         if (isDead)
         {
-            GameManager.Instance.NotifyObservers();            
+            GameManager.Instance.NotifyObservers();
         }
         SwitchAnimation();
         lastAttackTime -= Time.deltaTime;
@@ -108,8 +108,22 @@ public class PlayerController : MonoBehaviour
     //Animation Event
     void Hit()
     {
-        var targetStats = attackTarget.GetComponent<CharacterStats>();
+        if (attackTarget.CompareTag("Attackable"))
+        {
+            if (attackTarget.GetComponent<Rock>() && attackTarget.GetComponent<Rock>().rockStates == Rock.RockStates.HitNothing)
+            {
+                attackTarget.GetComponent<Rock>().rockStates = Rock.RockStates.HitEnemy;
 
-        targetStats.TakeDamage(characterStats, targetStats);
+                attackTarget.GetComponent<Rigidbody>().velocity = Vector3.one;
+
+                attackTarget.GetComponent<Rigidbody>().AddForce(transform.forward * 20, ForceMode.Impulse);
+            }
+        }
+        else
+        {
+            var targetStats = attackTarget.GetComponent<CharacterStats>();
+
+            targetStats.TakeDamage(characterStats, targetStats);
+        }
     }
 }

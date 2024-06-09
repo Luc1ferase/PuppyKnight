@@ -91,6 +91,13 @@ public class CharacterStats : MonoBehaviour
         //TODO:经验Updates
     }
 
+    public void TakeDamage(int damage,CharacterStats defender)  //方法重载
+    {
+        int currentDamage = Mathf.Max(damage - defender.CurrentDefence, 0);
+        CurrentHealth = Mathf.Max(CurrentHealth - currentDamage, 0);
+
+    }
+
     private int CurrentDamage()
     {
         float coreDamage = UnityEngine.Random.Range(attackData.minDamage, attackData.maxDamage);

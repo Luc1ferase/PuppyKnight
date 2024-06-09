@@ -147,3 +147,20 @@ if (attacker.isCritical) //Modified this line
 New Features:  
 
 Mesh Collider作用于石头人投出的石头，可以完全贴合素材
+
+#### Lesson26
+
+
+New Features:  
+--反击石头时的粒子特效
+
+Tips:
+```csharp
+rb.velocity = Vector3.one
+```
+==
+```
+rb.velocity = new Vector3(1, 1, 1);
+```
+
+人物的Rigidbody勾选is Kinematic=>防止与NavMeshAgent冲突
