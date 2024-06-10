@@ -16,7 +16,7 @@ public class CharacterStats : MonoBehaviour
     void Awake()
     {
         if (templateData != null)
-            characterData = Instantiate(templateData);       
+            characterData = Instantiate(templateData);
     }
 
     #region Read from Data_SO
@@ -78,9 +78,9 @@ public class CharacterStats : MonoBehaviour
     #endregion
 
     #region Character Combat
-    public void TakeDamage(CharacterStats attacker,CharacterStats defender)
+    public void TakeDamage(CharacterStats attacker, CharacterStats defender)
     {
-        int damage = Mathf.Max(attacker.CurrentDamage() - defender.CurrentDefence,0);
+        int damage = Mathf.Max(attacker.CurrentDamage() - defender.CurrentDefence, 0);
         CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
 
         if (attacker.isCritical)
@@ -90,10 +90,15 @@ public class CharacterStats : MonoBehaviour
 
         //TODO:Update UI
         UpdateHealthBarOnAttack?.Invoke(CurrentHealth, MaxHealth);
+
         //TODO:经验Updates
+        if (CurrentHealth <= 0)
+        {
+            attacker.characterData.UpdateExp(characterData.killPoint);
+        }
     }
 
-    public void TakeDamage(int damage,CharacterStats defender)  //方法重载
+    public void TakeDamage(int damage, CharacterStats defender)  //方法重载
     {
         int currentDamage = Mathf.Max(damage - defender.CurrentDefence, 0);
         CurrentHealth = Mathf.Max(CurrentHealth - currentDamage, 0);
