@@ -44,7 +44,8 @@ Ctrl + D 复制一个出来，跳出 fbx 文件就可以编辑了
 
 --lesson19 中未在 unity 中创建 GameManager 对象，导致获取游戏对象时抛了空指针异常
 
-TODO:  
+##### TODO
+
 --Add more enemies.
 
 #### Lesson21
@@ -54,7 +55,7 @@ TODO:
 --Now we have more Enemies,Grunt,Golem.  
 --Added generic attribute script by Override it to allow us to quickly create an enemy
 
-TODO:
+##### TODO
 
 Setup more Grunts.
 
@@ -103,7 +104,8 @@ void OnDisable()
 
 --Add Extension Method script which can judge if the attack is facing target.
 
-TODO:  
+##### TODO
+
 --Setup Golem
 
 #### Lesson24
@@ -208,3 +210,56 @@ Mathf.Clamp
 
 --给玩家添加了升级系统,玩家在击败不同的敌人之后可以获得对应的经验值.
 --每级的经验逐级递增,升级后回复到最大血量.
+
+#### Lesson29
+
+##### New Features
+--通过Canvas和TextMeshPro以及Image组件实现了玩家的等级，血量和经验值的UI显示。
+--添加了新的像素字体，美化界面。
+
+
+##### 创新:原视频中使用 Text 组件，改为 TextMeshPro
+[TextMeshPro 官方文档](https://docs.unity3d.com/cn/2021.1/Manual/com.unity.textmeshpro.html)
+
+TextMeshPro更改字体:
+1.直接选择字体只有原始自带的字体
+![Original](<ReadmePics/Create Font3.png>)
+2.去商店下载字体
+![AssetsStore](<ReadmePics/Create Font1.png>)
+3.去Window-TextMeshPro-Font Asset Creator
+![FontAssetCreator](<ReadmePics/Create Font2.png>)
+4.选择导入的新字体，生成适用于TMP的Assets
+![Create](<ReadmePics/Create Font4.png>)
+5.应用新字体，即可看到效果
+![New](<ReadmePics/Create Font5.png>)
+
+```csharp
+//PlayerHealthUI.cs
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;    //引用TextMeshPro
+using UnityEngine;
+using UnityEngine.UI;
+
+public class PlayerHealthUI : MonoBehaviour
+{
+    TextMeshProUGUI levelText;  //注意要调用的是TextMeshProUGUI而不是TextMeshPro
+    //Text levelText;   //原版Text组件
+    Image healthSlider;
+    Image expSlider;
+
+    void Awake()
+    {
+        levelText = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+        healthSlider = transform.GetChild(0).GetChild(0).GetComponent<Image>();
+        expSlider = transform.GetChild(1).GetChild(0).GetComponent<Image>();
+    }
+
+    void Update()
+{
+    levelText.text = "Level " + GameManager.Instance.playerStats.characterData.currentLevel; //overload ToString方法,使得等级显示为01,02这种
+    UpdateHealth();
+    UpdateExp();
+}
+}
+```
