@@ -33,6 +33,37 @@ Transform:
   - {fileID: 5255728716020296089}
   m_Father: {fileID: 5868414687385355958}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &559666768409857643
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 417497292045081846}
+  m_Layer: 7
+  m_Name: HealthBar Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &417497292045081846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559666768409857643}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.278, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6863687360047462079}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &939907444444306216
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,6 +394,7 @@ GameObject:
   - component: {fileID: 3630915688281526150}
   - component: {fileID: 7509478855341370474}
   - component: {fileID: 8578477416414975}
+  - component: {fileID: 1900288224145212203}
   m_Layer: 7
   m_Name: Slime
   m_TagString: Enemy
@@ -385,6 +417,7 @@ Transform:
   m_Children:
   - {fileID: 1562827374900635479}
   - {fileID: 7170825942968018214}
+  - {fileID: 417497292045081846}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4121355198162406132
@@ -481,10 +514,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67045ab1cb5484948b2ae14a97e034a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  templateData: {fileID: 0}
+  templateData: {fileID: 11400000, guid: 529c7d3500424f84ea190f940392a67e, type: 2}
   characterData: {fileID: 0}
-  attackData: {fileID: 0}
+  attackData: {fileID: 11400000, guid: 3b5b1642c9f863d448c7b0222eb329ed, type: 2}
   isCritical: 0
+--- !u!114 &1900288224145212203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5800957229680320035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d6f32da0154b445b9cfa314046cc2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthUIPrefab: {fileID: 3313185693250522929, guid: 4b5a3ccfd7591b3468bed8c4b8c83cb5, type: 3}
+  barPoint: {fileID: 417497292045081846}
+  alwaysVisible: 1
+  visibleTime: 3
 --- !u!1 &6042708073485892370
 GameObject:
   m_ObjectHideFlags: 0
