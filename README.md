@@ -268,7 +268,7 @@ public class PlayerHealthUI : MonoBehaviour
 }
 ```
 
-##### Lesson30 
+#### Lesson30 
 Shader Graph中Voronoi节点的UV相当于在一个平面上生成了一个网格，然后通过网格的UV来控制Voronoi的效果
 ![alt text](ReadmePics/UV.png)
 
@@ -287,3 +287,6 @@ Shader Graph按照教程操作后依然不是透明,非完美解决办法:
 `OnTriggerStay`：当其他碰撞体（Collider）持续与当前物体的触发器重叠时触发。也就是说，只要其他碰撞体在触发器内停留，该事件就会在每一帧都调用。
 
 `OnTriggerExit`：当其他碰撞体刚离开当前物体的触发器时触发。该事件只会在碰撞体离开瞬间调用一次。
+
+#### Lesson31
+[异步加载场景](https://docs.unity3d.com/cn/2022.3/ScriptReference/SceneManagement.SceneManager.LoadSceneAsync.html)

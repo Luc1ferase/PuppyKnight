@@ -335,7 +335,7 @@ MonoBehaviour:
     name: Tree_01
   - gameObject: {fileID: 4661435515762455780, guid: e289bf5debb17f6459818c207d781953, type: 3}
     settings:
-      m_Strength: 53.32773
+      m_Strength: 50.915966
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
       m_RotationRangeMax: {x: 0, y: 0, z: 0}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
